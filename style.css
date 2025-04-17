@@ -1,0 +1,44 @@
+body {
+  background: #fafafa;
+  font-family: sans-serif;
+  padding: 20px;
+}
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h1, h2, h3 {
+  color: #7B1FA2;
+}
+label {
+  display: block;
+  margin: 5px 0;
+}
+select, .btn {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+}
+.btn {
+  background-color: #7B1FA2;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+.pix-area {
+  margin-top: 2rem;
+  background: #f0f0f0;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.pix-copy {
+  background: #ddd;
+  padding: 1rem;
+  border-radius: 5px;
+  font-family: monospace;
+  word-break: break-all;
+}

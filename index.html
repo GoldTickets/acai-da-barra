@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Monte seu açaí com até 9 toppings! Entrega rápida e segura em 4 cidades."/>
+  <link rel="stylesheet" href="style.css"/>
+  <title>Açaí da Barra 🍧</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Açaí da Barra</h1>
+    <p class="desc">Escolha seu combo, selecione até 9 toppings e retire em uma das nossas unidades!</p>
+
+    <div class="field">
+      <label for="unidade">Escolha sua unidade:</label>
+      <select id="unidade" name="unidade" required>
+        <option value="">Selecione...</option>
+        <option value="Sumaré">Sumaré - Av. 7 de setembro, 596</option>
+        <option value="Nova Odessa">Nova Odessa - Av. João Pessoa, 1015</option>
+        <option value="Americana">Americana - Av. Paulista, 281</option>
+        <option value="Hortolândia">Hortolândia - Av. Brasil, 1100</option>
+      </select>
+    </div>
+
+    <div class="produtos">
+      <h2>Escolha seu Açaí</h2>
+      <div class="produto" data-produto="300ml">
+        <h3>1 Copo de Açaí 300ml + 9 Toppings - R$12,99</h3>
+        <div class="toppings"></div>
+        <a href="#" class="btn">Quero meu Açaí 🍧</a>
+      </div>
+      <div class="produto" data-produto="500ml">
+        <h3>1 Copo de Açaí 500ml + 9 Toppings - R$16,99</h3>
+        <div class="toppings"></div>
+        <a href="#" class="btn">Quero meu Açaí 🍧</a>
+      </div>
+      <div class="produto" data-produto="2x300ml">
+        <h3>2 Copos de Açaí 300ml + 9 Toppings - R$19,99</h3>
+        <div class="toppings"></div>
+        <a href="#" class="btn">Quero meu Açaí 🍧</a>
+      </div>
+      <div class="produto" data-produto="2x500ml">
+        <h3>2 Copos de Açaí 500ml + 9 Toppings - R$29,99</h3>
+        <div class="toppings"></div>
+        <a href="#" class="btn">Quero meu Açaí 🍧</a>
+      </div>
+    </div>
+
+    <div class="pix-area">
+      <h2>Pagamento via PIX</h2>
+      <img src="qr-pix.png" alt="QR Code Pix" class="qr"/>
+      <p>Copia e cola:</p>
+      <div class="pix-copy">00020101021226850014BR.GOV.BCB.PIX2557pix@acaidabarra.com.br5204000053039865802BR5925Açaí da Barra6009SaoPaulo62070503***6304****</div>
+    </div>
+  </div>
+
+  <script>
+    const toppingsList = [
+      "Granola", "Leite condensado", "Leite ninho", "Paçoca", "Morango",
+      "Banana", "Nutella", "Chocolate branco", "Chantilly", "M&M's",
+      "Coco ralado", "Sucrilhos", "Mel", "Ovomaltine", "KitKat"
+    ];
+
+    document.querySelectorAll('.produto').forEach(produto => {
+      const container = produto.querySelector('.toppings');
+      toppingsList.forEach(topping => {
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="checkbox" name="topping"> ${topping}`;
+        container.appendChild(label);
+      });
+
+      container.addEventListener('change', () => {
+        const checks = container.querySelectorAll('input[type="checkbox"]:checked');
+        if (checks.length > 9) {
+          checks[checks.length - 1].checked = false;
+          alert('Você só pode escolher até 9 toppings!');
+        }
+      });
+
+      produto.querySelector('.btn').addEventListener('click', () => {
+        alert('Redirecionando para o Checkout do Vega...');
+        // window.location.href = 'https://seudominio.com.br/checkout/PRODUTO';
+      });
+    });
+  </script>
+</body>
+</html>
