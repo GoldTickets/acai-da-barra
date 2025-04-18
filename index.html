@@ -106,7 +106,8 @@
       </select>
     </div>
 
-    <div class="produtos">
+ <!-- PRODUTOS -->
+<div class="produtos">
   <h2>Escolha seu Açaí</h2>
 
   <div class="produto" data-link="https://checkout.chocoloversoficial.com.br/VCCL1O8SBRSW">
@@ -138,85 +139,110 @@
   </div>
 </div>
 
-<!-- Modal do Checkout -->
+<!-- MODAL DO CHECKOUT -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <iframe id="checkout-frame" src="" frameborder="0" style="width:100%;height:90vh;"></iframe>
+    <iframe id="checkout-frame" src="" frameborder="0"></iframe>
   </div>
 </div>
 
+<!-- ESTILO DO MODAL OTIMIZADO -->
 <style>
 .modal {
   display: none;
   position: fixed;
   z-index: 9999;
-  padding: 40px;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.75);
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
+  padding: 0;
 }
 .modal-content {
   background: #fff;
-  border-radius: 10px;
   width: 95%;
-  max-width: 800px;
+  max-width: 700px;
+  max-height: 90vh;
+  border-radius: 10px;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.modal-content iframe {
+  width: 100%;
+  height: 85vh;
+  border: none;
 }
 .close {
   position: absolute;
-  top: 10px; right: 15px;
-  font-size: 28px;
+  top: 10px;
+  right: 15px;
+  font-size: 26px;
   font-weight: bold;
+  color: #333;
   cursor: pointer;
+  z-index: 10;
+}
+@media (max-width: 600px) {
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .modal-content iframe {
+    height: 100%;
+  }
 }
 </style>
 
+<!-- SCRIPT DO MODAL COM PIXEL FB + CLOAK -->
 <script>
-  const toppingsList = [
-    "Granola", "Leite condensado", "Leite ninho", "Paçoca", "Morango",
-    "Banana", "Nutella", "Chocolate branco", "Chantilly", "M&M's",
-    "Coco ralado", "Sucrilhos", "Mel", "Ovomaltine", "KitKat"
-  ];
+const toppingsList = [
+  "Granola", "Leite condensado", "Leite ninho", "Paçoca", "Morango",
+  "Banana", "Nutella", "Chocolate branco", "Chantilly", "M&M's",
+  "Coco ralado", "Sucrilhos", "Mel", "Ovomaltine", "KitKat"
+];
 
-  document.querySelectorAll('.produto').forEach(produto => {
-    const container = produto.querySelector('.toppings');
-    toppingsList.forEach(topping => {
-      const label = document.createElement('label');
-      label.innerHTML = `<input type="checkbox" name="topping"> ${topping}`;
-      container.appendChild(label);
-    });
-
-    container.addEventListener('change', () => {
-      const checks = container.querySelectorAll('input[type="checkbox"]:checked');
-      if (checks.length > 9) {
-        checks[checks.length - 1].checked = false;
-        alert('Você só pode escolher até 9 toppings!');
-      }
-    });
-
-    produto.querySelector('.btn').addEventListener('click', () => {
-      const modal = document.getElementById("modal");
-      const iframe = document.getElementById("checkout-frame");
-      iframe.src = produto.dataset.link;
-      modal.style.display = "flex";
-
-      setTimeout(() => {
-        if (typeof fbq !== 'undefined') {
-          fbq('track', 'Purchase', { value: 1, currency: 'BRL' });
-        }
-      }, 3000);
-    });
+document.querySelectorAll('.produto').forEach(produto => {
+  const container = produto.querySelector('.toppings');
+  toppingsList.forEach(topping => {
+    const label = document.createElement('label');
+    label.innerHTML = `<input type="checkbox" name="topping"> ${topping}`;
+    container.appendChild(label);
   });
 
-  document.querySelector(".close").onclick = function () {
-    document.getElementById("modal").style.display = "none";
-    document.getElementById("checkout-frame").src = "";
-  };
+  container.addEventListener('change', () => {
+    const checks = container.querySelectorAll('input[type="checkbox"]:checked');
+    if (checks.length > 9) {
+      checks[checks.length - 1].checked = false;
+      alert('Você só pode escolher até 9 toppings!');
+    }
+  });
+
+  produto.querySelector('.btn').addEventListener('click', () => {
+    const modal = document.getElementById("modal");
+    const iframe = document.getElementById("checkout-frame");
+    iframe.src = produto.dataset.link + window.location.search;
+    modal.style.display = "flex";
+
+    setTimeout(() => {
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Purchase', { value: 1, currency: 'BRL' });
+      }
+    }, 3000);
+  });
+});
+
+document.querySelector(".close").onclick = function () {
+  document.getElementById("modal").style.display = "none";
+  document.getElementById("checkout-frame").src = "";
+};
 </script>
+
 
     <div data-elementor-type="footer" data-elementor-id="47" class="elementor elementor-47 elementor-location-footer" data-elementor-post-type="elementor_library">
 			<div class="elementor-element elementor-element-fe94d29 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="fe94d29" data-element_type="container" data-settings="{&quot;background_background&quot;:&quot;gradient&quot;,&quot;shape_divider_top&quot;:&quot;wave-brush&quot;,&quot;_ha_eqh_enable&quot;:false}">
