@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -26,25 +27,29 @@
 
     <div class="produtos">
       <h2>Escolha seu Açaí</h2>
-      <div class="produto" data-produto="300ml">
-        <h3>1 Copo de Açaí 300ml + 9 Toppings - R$12,99</h3>
-        <div class="toppings"></div>
-        <a href="#" class="btn">Quero meu Açaí 🍧</a>
+      <div class="card">
+        <img src="criativo4.png" alt="Açaí 300ml"/>
+        <h3>1 Copo de Açaí 300ml + 9 Toppings</h3>
+        <p>R$12,99</p>
+        <a class="btn" href="https://checkout.chocoloversoficial.com.br/VCCL1O8SBRSU" target="_blank">Quero meu Açaí</a>
       </div>
-      <div class="produto" data-produto="500ml">
-        <h3>1 Copo de Açaí 500ml + 9 Toppings - R$16,99</h3>
-        <div class="toppings"></div>
-        <a href="#" class="btn">Quero meu Açaí 🍧</a>
+      <div class="card">
+        <img src="criativo3.png" alt="Açaí 500ml"/>
+        <h3>1 Copo de Açaí 500ml + 9 Toppings</h3>
+        <p>R$16,99</p>
+        <a class="btn" href="https://checkout.chocoloversoficial.com.br/VCCL1O8SBRSV" target="_blank">Quero meu Açaí</a>
       </div>
-      <div class="produto" data-produto="2x300ml">
-        <h3>2 Copos de Açaí 300ml + 9 Toppings - R$19,99</h3>
-        <div class="toppings"></div>
-        <a href="#" class="btn">Quero meu Açaí 🍧</a>
+      <div class="card">
+        <img src="criativo1.png" alt="2x Açaí 300ml"/>
+        <h3>2 Copos de Açaí 300ml + 9 Toppings</h3>
+        <p>R$19,99</p>
+        <a class="btn" href="https://checkout.chocoloversoficial.com.br/VCCL1O8SBRSW" target="_blank">Quero meu Açaí</a>
       </div>
-      <div class="produto" data-produto="2x500ml">
-        <h3>2 Copos de Açaí 500ml + 9 Toppings - R$29,99</h3>
-        <div class="toppings"></div>
-        <a href="#" class="btn">Quero meu Açaí 🍧</a>
+      <div class="card">
+        <img src="criativo2.png" alt="2x Açaí 500ml"/>
+        <h3>2 Copos de Açaí 500ml + 9 Toppings</h3>
+        <p>R$29,99</p>
+        <a class="btn" href="https://checkout.chocoloversoficial.com.br/VCCL1O8SBRSX" target="_blank">Quero meu Açaí</a>
       </div>
     </div>
 
@@ -55,145 +60,5 @@
       <div class="pix-copy">00020101021226850014BR.GOV.BCB.PIX2557pix@xn--aaadabarra-q3a1e.online5204000053039865802BR5925Açaí da Barra6009SaoPaulo62070503***6304****</div>
     </div>
   </div>
-
-  <script>
-    const toppingsList = [
-      "Granola", "Leite condensado", "Leite ninho", "Paçoca", "Morango",
-      "Banana", "Nutella", "Chocolate branco", "Chantilly", "M&M's",
-      "Coco ralado", "Sucrilhos", "Mel", "Ovomaltine", "KitKat"
-    ];
-
-    document.querySelectorAll('.produto').forEach(produto => {
-      const container = produto.querySelector('.toppings');
-      toppingsList.forEach(topping => {
-        const label = document.createElement('label');
-        label.innerHTML = `<input type="checkbox" name="topping"> ${topping}`;
-        container.appendChild(label);
-      });
-
-      container.addEventListener('change', () => {
-        const checks = container.querySelectorAll('input[type="checkbox"]:checked');
-        if (checks.length > 9) {
-          checks[checks.length - 1].checked = false;
-          alert('Você só pode escolher até 9 toppings!');
-        }
-      });
-
-      produto.querySelector('.btn').addEventListener('click', () => {
-        alert('Redirecionando para o Checkout do Vega...');
-      });
-    });
-  </script>
-<!-- Rodapé otimizado com responsividade -->
-<footer class="footer">
-  <div class="footer-newsletter">
-    <h2>Cadastre-se em nossa newsletter e fique por dentro das principais novidades!</h2>
-    <form>
-      <input type="email" placeholder="Informe seu e-mail aqui" required />
-      <label>
-        <input type="checkbox" required /> Eu aceito os Termos de Uso
-      </label>
-      <button type="submit">Quero me cadastrar!</button>
-    </form>
-  </div>
-
-  <div class="footer-links">
-    <ul>
-      <li><a href="https://franqueado.acaidabarra.com.br/" target="_blank">Seja um franqueado</a></li>
-      <li><a href="https://acaidabarra.com.br/quem-somos/">Quem somos</a></li>
-      <li><a href="https://acaidabarra.com.br/produtos/">Produtos</a></li>
-      <li><a href="https://acaidabarra.com.br/lojas/">Lojas</a></li>
-      <li><a href="https://blog.acaidabarra.com.br/" target="_blank">Blog</a></li>
-      <li><a href="https://acaidabarra.com.br/contato/">Fale conosco</a></li>
-      <li><a href="https://barralovers.com.br/" target="_blank">Barra Lovers</a></li>
-      <li><a href="https://delivery.barralovers.com.br/" target="_blank">Delivery</a></li>
-    </ul>
-    <ul>
-      <li><a href="https://acaidabarra.com.br/politica-de-cookies/">Política de Cookies</a></li>
-      <li><a href="https://acaidabarra.com.br/politica-de-privacidade/">Política de Privacidade</a></li>
-    </ul>
-  </div>
-
-  <div class="footer-social">
-    <a href="https://www.facebook.com/acaidabarraoficial" target="_blank">Facebook</a>
-    <a href="https://twitter.com/AcaiDaBarraOfc" target="_blank">Twitter</a>
-    <a href="https://www.youtube.com/channel/UCOLPLUKtgg9DUEDPvfvfrfw" target="_blank">YouTube</a>
-    <a href="https://www.instagram.com/acaidabarraoficial/" target="_blank">Instagram</a>
-    <a href="https://open.spotify.com/user/n1myz2vi6vstby2pr0e7a3lov" target="_blank">Spotify</a>
-    <a href="https://www.linkedin.com/company/28189955/admin/" target="_blank">LinkedIn</a>
-  </div>
-
-  <div class="footer-credits">
-    <p>Açaí da Barra &copy; 2023 – Todos os direitos reservados</p>
-    <p>Desenvolvido com amor por: <a href="https://www.yooper.com.br/" target="_blank">Yooper</a></p>
-  </div>
-</footer>
-
-<style>
-.footer {
-  background: linear-gradient(to right, #7B1FA2, #9C27B0);
-  color: white;
-  padding: 2rem;
-  font-family: sans-serif;
-  text-align: center;
-}
-.footer h2 {
-  margin-bottom: 1rem;
-}
-.footer form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-width: 400px;
-  margin: auto;
-}
-.footer form input[type="email"] {
-  padding: 0.5rem;
-  border-radius: 6px;
-  border: none;
-}
-.footer form button {
-  padding: 0.7rem;
-  background: white;
-  color: #7B1FA2;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-}
-.footer-links a {
-  color: white;
-  text-decoration: none;
-  display: block;
-  margin: 0.3rem 0;
-}
-.footer-social a {
-  margin: 0 0.5rem;
-  color: white;
-  text-decoration: none;
-}
-.footer-credits {
-  margin-top: 2rem;
-  font-size: 0.9rem;
-}
-@media (max-width: 600px) {
-  .footer-links {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-</style>
-
 </body>
 </html>

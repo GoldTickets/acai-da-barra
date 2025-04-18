@@ -5,7 +5,7 @@ body {
   padding: 20px;
 }
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
   background: #fff;
   padding: 2rem;
@@ -14,10 +14,6 @@ body {
 }
 h1, h2, h3 {
   color: #7B1FA2;
-}
-label {
-  display: block;
-  margin: 5px 0;
 }
 select, .btn {
   padding: 10px;
@@ -30,6 +26,23 @@ select, .btn {
   text-decoration: none;
   display: inline-block;
 }
+.produtos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+.card {
+  background: #f0f0f0;
+  border-radius: 10px;
+  padding: 1rem;
+  max-width: 200px;
+  text-align: center;
+}
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
 .pix-area {
   margin-top: 2rem;
   background: #f0f0f0;
@@ -41,5 +54,5 @@ select, .btn {
   padding: 1rem;
   border-radius: 5px;
   font-family: monospace;
-  word-break: break-all;
+  word-break: break-word;
 }
