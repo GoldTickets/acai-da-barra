@@ -243,22 +243,19 @@ document.querySelectorAll('.produto').forEach(produto => {
     }
   });
 
- produto.querySelector('.btn').addEventListener('click', () => {
-  // Rastreia início do checkout com Pixel da Meta
-  if (typeof fbq !== 'undefined') {
-    fbq('track', 'InitiateCheckout');
-  }
+produto.querySelector('.btn').addEventListener('click', () => {
+  const modal = document.getElementById("modal");
+  const iframe = document.getElementById("checkout-frame");
+  iframe.src = produto.dataset.link + window.location.search;
+  modal.style.display = "flex";
 
-  // Redireciona pro link do produto com os parâmetros da URL
-  const checkoutLink = produto.dataset.link + window.location.search;
-  window.location.href = checkoutLink;
+  setTimeout(() => {
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Purchase', { value: 1, currency: 'BRL' });
+    }
+  }, 3000);
 });
 
-
-document.querySelector(".close").onclick = function () {
-  document.getElementById("modal").style.display = "none";
-  document.getElementById("checkout-frame").src = "";
-};
 </script>
 
 
