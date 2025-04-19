@@ -229,12 +229,15 @@ const toppingsList = [
 
 document.querySelectorAll('.produto').forEach(produto => {
   const container = produto.querySelector('.toppings');
+
+  // Cria checkboxes
   toppingsList.forEach(topping => {
     const label = document.createElement('label');
     label.innerHTML = `<input type="checkbox" name="topping"> ${topping}`;
     container.appendChild(label);
   });
 
+  // Limita a 9 toppings
   container.addEventListener('change', () => {
     const checks = container.querySelectorAll('input[type="checkbox"]:checked');
     if (checks.length > 9) {
@@ -243,20 +246,20 @@ document.querySelectorAll('.produto').forEach(produto => {
     }
   });
 
-produto.querySelector('.btn').addEventListener('click', () => {
-  const modal = document.getElementById("modal");
-  const iframe = document.getElementById("checkout-frame");
-  iframe.src = produto.dataset.link + window.location.search;
-  modal.style.display = "flex";
-
-  setTimeout(() => {
+  // Botão de compra
+  produto.querySelector('.btn').addEventListener('click', () => {
+    // Evento Pixel
     if (typeof fbq !== 'undefined') {
-      fbq('track', 'Purchase', { value: 1, currency: 'BRL' });
+      fbq('track', 'InitiateCheckout');
     }
-  }, 3000);
-});
 
+    // Redireciona pro link do produto com os params da URL (ex: ?utm_source=...)
+    const checkoutLink = produto.dataset.link + window.location.search;
+    window.location.href = checkoutLink;
+  });
+});
 </script>
+
 
 
     <div data-elementor-type="footer" data-elementor-id="47" class="elementor elementor-47 elementor-location-footer" data-elementor-post-type="elementor_library">
