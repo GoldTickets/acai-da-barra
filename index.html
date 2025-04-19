@@ -230,7 +230,7 @@ const toppingsList = [
 document.querySelectorAll('.produto').forEach(produto => {
   const container = produto.querySelector('.toppings');
 
-  // Cria checkboxes
+  // Cria os checkboxes dos toppings
   toppingsList.forEach(topping => {
     const label = document.createElement('label');
     label.innerHTML = `<input type="checkbox" name="topping"> ${topping}`;
@@ -253,10 +253,23 @@ document.querySelectorAll('.produto').forEach(produto => {
       fbq('track', 'InitiateCheckout');
     }
 
-    // Redireciona pro link do produto com os params da URL (ex: ?utm_source=...)
+    // Pega o link e os parâmetros da URL (utm, etc.)
     const checkoutLink = produto.dataset.link + window.location.search;
-    window.location.href = checkoutLink;
+
+    // Abre o modal e carrega o iframe
+    const modal = document.getElementById("modal");
+    const iframe = document.getElementById("checkout-frame");
+    iframe.src = checkoutLink;
+    modal.style.display = "flex";
   });
+});
+
+// Fecha o modal ao clicar no X
+document.querySelector(".close").addEventListener("click", () => {
+  const modal = document.getElementById("modal");
+  const iframe = document.getElementById("checkout-frame");
+  iframe.src = ""; // Limpa o iframe
+  modal.style.display = "none";
 });
 </script>
 
