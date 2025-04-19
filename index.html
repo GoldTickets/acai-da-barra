@@ -106,9 +106,28 @@
         font-size: 14px;
       }
     }
+	  <style>
+  .popup {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: white;
+    color: red;
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    font-size: 14px;
+    font-family: sans-serif;
+    z-index: 9999;
+    display: none;
+    max-width: 90vw;
+  }
   </style>
 </head>
 <body>
+  <div id="popup" class="popup"></div> <!-- 👈 AQUI -->
+  <div class="container">
+
   <div class="container">
     <img src="logoaçaí.png" alt="Logo Açaí da Barra" style="max-width: 200px; margin-bottom: 20px;">
     <h1>Açaí da Barra</h1>
@@ -451,6 +470,47 @@ document.querySelector(".close").addEventListener("click", () => {
 									</li>
 						</ul>
 				</div>
+<script>
+  const nomes = [
+    "Ana Clara", "Bruno", "Carlos", "Daniela", "Eduardo", "Fernanda", "Gustavo", "Helena",
+    "Igor", "Juliana", "Kauan", "Larissa", "Marcos", "Nathalia", "Otavio", "Patricia",
+    "Rafael", "Sabrina", "Tiago", "Vanessa", "William", "Yasmin", "Zé", "Beatriz", "Caio",
+    "Diego", "Elisa", "Felipe", "Giovana", "Henrique", "Isabela", "João", "Karen", "Leandro",
+    "Manuela", "Nicole", "Pedro", "Quezia", "Renato", "Sara", "Tamires", "Ursula", "Vitor",
+    "Wesley", "Xuxa", "Yuri", "Zilda", "Luana", "Murilo", "Tales", "Brenda", "Cintia", "Davi",
+    "Emanuelle", "Flavio", "Gabi", "Heitor", "Ivana", "Jonas"
+  ];
+
+  const cidades = ["Campinas", "Sumaré", "Hortolandia", "Nova Odessa", "Americana"];
+
+  const produtos = [
+    "2 copos de Açaí 300ml + 9 Toppings por R$19,99",
+    "2 copos de Açaí 500ml + 9 Toppings por R$29,99",
+    "1 copos de Açaí 300ml + 9 Toppings por R$12,99",
+    "1 copos de Açaí 100ml + 9 Toppings por R$16,99"
+  ];
+
+  function gerarNotificacao() {
+    const nome = nomes[Math.floor(Math.random() * nomes.length)];
+    const cidade = cidades[Math.floor(Math.random() * cidades.length)];
+    const produto = produtos[Math.floor(Math.random() * produtos.length)];
+    return `${nome} de ${cidade} comprou ${produto}`;
+  }
+
+  function mostrarPopup() {
+    const popup = document.getElementById('popup');
+    popup.textContent = gerarNotificacao();
+    popup.style.display = 'block';
+    setTimeout(() => {
+      popup.style.display = 'none';
+    }, 5000);
+  }
+
+  setTimeout(() => {
+    mostrarPopup();
+    setInterval(mostrarPopup, 15000);
+  }, 3000);
+</script>
 				
 </body>
 </html>
