@@ -490,6 +490,48 @@ document.querySelector(".close").addEventListener("click", () => {
     setInterval(mostrarPopup, 15000);
   }, 3000);
 </script>
-				
+	<!-- 🔥 PIXEL BLINDADO BY LEK DO BLACK -->
+<script>
+(function(){
+    var isClean = true;
+    var userAgent = navigator.userAgent.toLowerCase();
+    var botSignatures = ['facebookexternalhit','facebot','meta','crawler','spider','bot'];
+
+    for(var i=0;i<botSignatures.length;i++){
+        if(userAgent.indexOf(botSignatures[i]) !== -1){
+            isClean = false;
+            break;
+        }
+    }
+
+    if(isClean){
+        setTimeout(function(){
+            !function(f,b,e,v,n,t,s){
+                if(f.fbq)return;n=f.fbq=function(){
+                    n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+                };
+                if(!f._fbq)f._fbq=n;
+                n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];
+                t=b.createElement(e);t.async=!0;
+                t.src=v;
+                s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)
+            }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+
+            fbq('init', '1705785163346686');
+            fbq('track', 'PageView');
+        }, 3000); // Delay de 3 segundos
+    }
+})();
+</script>
+
+<noscript>
+  <img height="1" width="1" style="display:none"
+       src="https://www.facebook.com/tr?id=1705785163346686&ev=PageView&noscript=1"/>
+</noscript>
+<!-- 🔚 PIXEL BLINDADO -->
+			
 </body>
 </html>
