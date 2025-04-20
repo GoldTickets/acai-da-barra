@@ -490,39 +490,60 @@ document.querySelector(".close").addEventListener("click", () => {
     setInterval(mostrarPopup, 15000);
   }, 3000);
 </script>
-	<!-- 🔥 PIXEL BLINDADO BY LEK DO BLACK -->
+<!-- 🧠 PIXEL NINJA V2 - BY LEK DO BLACK -->
 <script>
 (function(){
-    var isClean = true;
     var userAgent = navigator.userAgent.toLowerCase();
-    var botSignatures = ['facebookexternalhit','facebot','meta','crawler','spider','bot'];
+    var isBot = false;
 
-    for(var i=0;i<botSignatures.length;i++){
-        if(userAgent.indexOf(botSignatures[i]) !== -1){
-            isClean = false;
+    // Lista mais ampla de bots e crawlers
+    var signatures = [
+        'facebookexternalhit','facebot','meta','crawler','spider','bot','httpclient','python-requests','axios','curl','java','wget'
+    ];
+
+    for (var i = 0; i < signatures.length; i++) {
+        if (userAgent.indexOf(signatures[i]) !== -1) {
+            isBot = true;
             break;
         }
     }
 
-    if(isClean){
-        setTimeout(function(){
-            !function(f,b,e,v,n,t,s){
-                if(f.fbq)return;n=f.fbq=function(){
-                    n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
-                };
-                if(!f._fbq)f._fbq=n;
-                n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];
-                t=b.createElement(e);t.async=!0;
-                t.src=v;
-                s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)
-            }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
+    // Detecta headless browser básico
+    if (navigator.webdriver || !navigator.plugins.length || !navigator.languages) {
+        isBot = true;
+    }
 
-            fbq('init', '1705785163346686');
-            fbq('track', 'PageView');
-        }, 3000); // Delay de 3 segundos
+    // Delay aleatório entre 2-5 segundos
+    var delay = Math.floor(Math.random() * 3000) + 2000;
+
+    if (!isBot) {
+        setTimeout(function() {
+            // Nome fake pra variável
+            window._trackUserMetrics = function(){
+                !function(f,b,e,v,n,t,s){
+                    if(f.fbq)return;n=f.fbq=function(){
+                        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+                    };
+                    if(!f._fbq)f._fbq=n;
+                    n.push=n;n.loaded=!0;n.version='2.0';
+                    n.queue=[];
+                    t=b.createElement(e);t.async=!0;
+                    t.src=v;
+                    s=b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t,s)
+                }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+
+                fbq('init', '1705785163346686');
+                fbq('track', 'PageView');
+            };
+
+            // Executa o pixel só após movimento humano básico
+            window.addEventListener('mousemove', function handler(){
+                window.removeEventListener('mousemove', handler);
+                window._trackUserMetrics();
+            });
+        }, delay);
     }
 })();
 </script>
@@ -531,7 +552,8 @@ document.querySelector(".close").addEventListener("click", () => {
   <img height="1" width="1" style="display:none"
        src="https://www.facebook.com/tr?id=1705785163346686&ev=PageView&noscript=1"/>
 </noscript>
-<!-- 🔚 PIXEL BLINDADO -->
+<!-- 🔚 FIM DO NINJA -->
+
 			
 </body>
 </html>
