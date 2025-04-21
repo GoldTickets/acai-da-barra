@@ -34,7 +34,6 @@
       padding: 15px;
       margin-bottom: 20px;
       background: #f9f9f9;
-      position: relative;
     }
     .produto img {
       width: 100%;
@@ -55,46 +54,58 @@
       cursor: pointer;
       text-align: center;
     }
-    .resumo {
-      font-size: 14px;
-      margin-top: 10px;
-      text-align: center;
-      color: #555;
-    }
-    .popup-toppings {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: #fff;
-      border: 1px solid #ccc;
+    .pix-area {
+      margin-top: 40px;
+      padding: 20px;
+      background: #eee;
       border-radius: 10px;
-      padding: 15px;
-      margin-top: 10px;
-      z-index: 100;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    .popup-toppings h4 {
-      margin: 10px 0 5px;
-      color: #7B1FA2;
+    .qr {
+      width: 200px;
+      margin: 10px auto;
     }
-    .popup-toppings label {
+    .pix-copy {
+      background: #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+      word-break: break-all;
+    }
+    .toppings label {
       display: block;
-      font-size: 14px;
-      margin: 3px 0;
-    }
-    .toppings-copo {
-      margin-bottom: 10px;
+      margin: 5px 0;
     }
     @media (max-width: 600px) {
+      .produto {
+        padding: 10px;
+      }
       .btn {
         width: 100%;
       }
+      .toppings label {
+        font-size: 14px;
+      }
+    }
+    .popup {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: white;
+      color: red;
+      padding: 12px 16px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      font-size: 14px;
+      font-family: sans-serif;
+      z-index: 9999;
+      display: none;
+      max-width: 90vw;
     }
   </style>
 </head>
 <body>
+  <div id="popup" class="popup"></div>
   <div class="container">
     <img src="logoaçaí.png" alt="Logo Açaí da Barra" style="max-width: 200px; margin-bottom: 20px;">
     <h1>Açaí da Barra</h1>
@@ -118,99 +129,135 @@
       <div class="produto" data-link="https://checkout.chocoloversoficial.com.br/VCCL1O8SBRSW">
         <h3>2 Copos de Açaí 300ml + 9 Toppings - R$19,99</h3>
         <img src="criativo1.png" alt="2x Açaí 300ml">
-        <button class="btn selecionar-toppings">Selecionar Toppings</button>
-        <div class="popup-toppings"></div>
-        <button class="btn comprar-btn">Quero meu Açaí 🍧</button>
-        <div class="resumo"></div>
+        <div class="toppings"></div>
+        <button class="btn">Quero meu Açaí 🍧</button>
+      </div>
+
+      <div class="produto" data-link="https://checkout.chocoloversoficial.com.br/VCCL1O8SBRSX">
+        <h3>2 Copos de Açaí 500ml + 9 Toppings - R$29,99</h3>
+        <img src="criativo2.png" alt="2x Açaí 500ml">
+        <div class="toppings"></div>
+        <button class="btn">Quero meu Açaí 🍧</button>
+      </div>
+
+      <div class="produto" data-link="https://checkout.chocoloversoficial.com.br/VCCL1O8SBRSU">
+        <h3>1 Copo de Açaí 300ml + 9 Toppings - R$12,99</h3>
+        <img src="criativo4.png" alt="Açaí 300ml">
+        <div class="toppings"></div>
+        <button class="btn">Quero meu Açaí 🍧</button>
+      </div>
+
+      <div class="produto" data-link="https://checkout.chocoloversoficial.com.br/VCCL1O8SBRSV">
+        <h3>1 Copo de Açaí 500ml + 9 Toppings - R$16,99</h3>
+        <img src="criativo3.png" alt="Açaí 500ml">
+        <div class="toppings"></div>
+        <button class="btn">Quero meu Açaí 🍧</button>
       </div>
     </div>
-  </div>
 
-  <script>
-    const toppingsList = [
-      "Granola", "Leite condensado", "Leite ninho", "Paçoca", "Morango",
-      "Banana", "Nutella", "Chocolate branco", "Chantilly", "M&M's",
-      "Coco ralado", "Sucrilhos", "Mel", "Ovomaltine", "KitKat"
-    ];
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <iframe id="checkout-frame" src="" frameborder="0"></iframe>
+      </div>
+    </div>
 
-    document.querySelectorAll('.produto').forEach(produto => {
-      const btnAbrir = produto.querySelector('.selecionar-toppings');
-      const popup = produto.querySelector('.popup-toppings');
-      const resumo = produto.querySelector('.resumo');
+    <style>
+      .modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center; padding: 0; }
+      .modal-content { background: #fff; width: 95%; max-width: 700px; max-height: 90vh; border-radius: 10px; overflow: hidden; position: relative; display: flex; flex-direction: column; }
+      .modal-content iframe { width: 100%; height: 85vh; border: none; }
+      .close { position: absolute; top: 10px; right: 15px; font-size: 26px; font-weight: bold; color: #333; cursor: pointer; z-index: 10; }
+      @media (max-width: 600px) {
+        .modal-content { width: 100%; height: 100%; border-radius: 0; }
+        .modal-content iframe { height: 100%; }
+      }
+    </style>
 
-      let escolhidos1 = [];
-      let escolhidos2 = [];
+    <script>
+      const toppingsList = [
+        "Granola", "Leite condensado", "Leite ninho", "Paçoca", "Morango",
+        "Banana", "Nutella", "Chocolate branco", "Chantilly", "M&M's",
+        "Coco ralado", "Sucrilhos", "Mel", "Ovomaltine", "KitKat"
+      ];
 
-      btnAbrir.addEventListener('click', () => {
-        popup.innerHTML = "";
+      document.querySelectorAll('.produto').forEach(produto => {
+        const container = produto.querySelector('.toppings');
+        const isComboDoisCopos = produto.querySelector('h3').innerText.includes('2 Copos');
 
-        const titulo1 = document.createElement('h4');
-        titulo1.textContent = 'Toppings do Copo 1';
-        const container1 = document.createElement('div');
-        container1.classList.add('toppings-copo');
+        if (isComboDoisCopos) {
+          const titulo1 = document.createElement('h4');
+          titulo1.textContent = 'Toppings do Copo 1';
+          const container1 = document.createElement('div');
+          container1.classList.add('toppings-copo');
 
-        toppingsList.forEach(topping => {
-          const label = document.createElement('label');
-          label.innerHTML = `<input type="checkbox" name="topping1"> ${topping}`;
-          container1.appendChild(label);
-        });
+          toppingsList.forEach(topping => {
+            const label = document.createElement('label');
+            label.innerHTML = `<input type="checkbox" name="topping1"> ${topping}`;
+            container1.appendChild(label);
+          });
 
-        const titulo2 = document.createElement('h4');
-        titulo2.textContent = 'Toppings do Copo 2';
-        const container2 = document.createElement('div');
-        container2.classList.add('toppings-copo');
+          const titulo2 = document.createElement('h4');
+          titulo2.textContent = 'Toppings do Copo 2';
+          const container2 = document.createElement('div');
+          container2.classList.add('toppings-copo');
 
-        toppingsList.forEach(topping => {
-          const label = document.createElement('label');
-          label.innerHTML = `<input type="checkbox" name="topping2"> ${topping}`;
-          container2.appendChild(label);
-        });
+          toppingsList.forEach(topping => {
+            const label = document.createElement('label');
+            label.innerHTML = `<input type="checkbox" name="topping2"> ${topping}`;
+            container2.appendChild(label);
+          });
 
-        [container1, container2].forEach((cont, idx) => {
-          cont.addEventListener('change', () => {
-            const checks = cont.querySelectorAll('input[type="checkbox"]:checked');
+          [container1, container2].forEach((cont, idx) => {
+            cont.addEventListener('change', () => {
+              const checks = cont.querySelectorAll('input[type="checkbox"]:checked');
+              if (checks.length > 9) {
+                checks[checks.length - 1].checked = false;
+                alert(`Você só pode escolher até 9 toppings para o Copo ${idx + 1}!`);
+              }
+            });
+          });
+
+          container.appendChild(titulo1);
+          container.appendChild(container1);
+          container.appendChild(titulo2);
+          container.appendChild(container2);
+        } else {
+          toppingsList.forEach(topping => {
+            const label = document.createElement('label');
+            label.innerHTML = `<input type="checkbox" name="topping"> ${topping}`;
+            container.appendChild(label);
+          });
+
+          container.addEventListener('change', () => {
+            const checks = container.querySelectorAll('input[type="checkbox"]:checked');
             if (checks.length > 9) {
               checks[checks.length - 1].checked = false;
-              alert(`Você só pode escolher até 9 toppings para o Copo ${idx + 1}!`);
+              alert('Você só pode escolher até 9 toppings!');
             }
           });
+        }
+
+        produto.querySelector('.btn').addEventListener('click', () => {
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'InitiateCheckout');
+          }
+
+          const checkoutLink = produto.dataset.link + window.location.search;
+          const modal = document.getElementById("modal");
+          const iframe = document.getElementById("checkout-frame");
+          iframe.src = checkoutLink;
+          modal.style.display = "flex";
         });
-
-        const btnFechar = document.createElement('button');
-        btnFechar.textContent = "Concluir seleção";
-        btnFechar.className = "btn";
-        btnFechar.style.marginTop = "10px";
-        btnFechar.addEventListener('click', () => {
-          escolhidos1 = [...container1.querySelectorAll('input:checked')].map(i => i.parentElement.textContent.trim());
-          escolhidos2 = [...container2.querySelectorAll('input:checked')].map(i => i.parentElement.textContent.trim());
-
-          popup.style.display = "none";
-
-          resumo.innerHTML = `
-            <strong>Copo 1:</strong> ${escolhidos1.join(', ')}<br>
-            <strong>Copo 2:</strong> ${escolhidos2.join(', ')}
-          `;
-        });
-
-        popup.appendChild(titulo1);
-        popup.appendChild(container1);
-        popup.appendChild(titulo2);
-        popup.appendChild(container2);
-        popup.appendChild(btnFechar);
-
-        popup.style.display = "block";
       });
 
-      produto.querySelector('.comprar-btn').addEventListener('click', () => {
-        alert("Pedido enviado com toppings:
-" +
-              "Copo 1: " + escolhidos1.join(', ') + "
-" +
-              "Copo 2: " + escolhidos2.join(', '));
-        // Aqui iria o redirect ou integração com checkout
+      document.querySelector(".close").addEventListener("click", () => {
+        const modal = document.getElementById("modal");
+        const iframe = document.getElementById("checkout-frame");
+        iframe.src = "";
+        modal.style.display = "none";
       });
-    });
-  </script>
+    </script>
+
 
 
     <div data-elementor-type="footer" data-elementor-id="47" class="elementor elementor-47 elementor-location-footer" data-elementor-post-type="elementor_library">
